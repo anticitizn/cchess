@@ -2,53 +2,41 @@
 #include <stdlib.h>
 
 enum figures {None=0, Pawn=1, Knight=2, Bishop=3, Rook=4, Queen=5, King=6};
+const char figure_chars[8] = {' ', 'p', 'k', 'b', 'r', 'Q', '@'};
 
-short** initializeBoard() 
+void initializeBoard(int board[8][8]) 
 {
-    short** board = malloc(8*sizeof(short*));
-    for (int i = 0; i < 8; i++)
-    {
-        board[i] = malloc( 8*sizeof(short));
-
-        for (int j = 0; j < 8; j++) 
-        {
-            board[i][j] = 0;
-        }
+    int order[8] = {Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook};
+    for (int i = 0; i < 8; i++) {
+        board[0][i] = order[i];
+        board[1][i] = Pawn;
+        board[6][i] = -Pawn;
+        board[7][i] = -order[i];
     }
 
-    // White figures
-    board[0][0] = Rook;
-    board[1][0] = Knight;
-    board[2][0] = Bishop;
-    board[3][0] = Queen;
-    board[4][0] = King;
-    board[5][0] = Bishop;
-    board[6][0] = Knight;
-    board[7][0] = Rook;
-    
-    for (int i = 0; i < 8; i++) 
-    {
-        board[i][1] = Pawn;
-    }
-    
-    // Black figures
-    board[0][0] = -Rook;
-    board[1][0] = -Knight;
-    board[2][0] = -Bishop;
-    board[3][0] = -Queen;
-    board[4][0] = -King;
-    board[5][0] = -Bishop;
-    board[6][0] = -Knight;
-    board[7][0] = -Rook;
-    
-    for (int i = 0; i < 8; i++) 
-    {
-        board[i][1] = -Pawn;
-    }
-
-    return board;
+    return;
 }
 
-void main() {
-    short** board = initializeBoard();
+char getFigureChar(const int figure)
+{
+    return figure_chars[abs(figure)];
+}
+
+char getFigureColor(const int figure)
+{
+    return figure >= 0 ? ' ' : '-';
+}
+
+int main() {
+    int board[8][8] = {};
+    initializeBoard(board);
+
+    for (int i = 7; i >= 0; i--) {
+        for (int j = 0; j < 8; j++) {
+            printf("%c%c ", getFigureColor(board[i][j]), getFigureChar(board[i][j]));
+        }
+        putchar('\n');
+    }
+
+    return 0;
 }
