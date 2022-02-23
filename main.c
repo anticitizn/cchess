@@ -162,6 +162,72 @@ void getPossibleMovesKnight(int board[8][8], const int x, const int y)
     return;
 }
 
+void getPossibleMovesRook(int board[8][8], const int x, const int y)
+{
+    for (int i = 0; i < 8; i++)
+    {
+        int xt = x + i;
+        int yt = y;
+        if (isWithinBoard(xt, yt))
+        {
+            board[yt][xt];
+        }
+    }
+
+    for (int i = 0; i < 8; i++)
+    {
+        int xt = x - i;
+        int yt = y;
+        if (isWithinBoard(xt, yt))
+        {
+            board[yt][xt];
+        }
+    }
+
+    for (int i = 0; i < 8; i++)
+    {
+        int xt = x;
+        int yt = y + i;
+        if (isWithinBoard(xt, yt))
+        {
+            board[yt][xt];
+        }
+    }
+
+    for (int i = 0; i < 8; i++)
+    {
+        int xt = x;
+        int yt = y - i;
+        if (isWithinBoard(xt, yt))
+        {
+            board[yt][xt];
+        }
+    }
+}
+
+void getPossibleMovesQueen(int board[8][8], const int x, const int y)
+{
+    getPossibleMovesRook(board, x, y);
+    getPossibleMovesBishop(board, x, y);
+}
+
+void getPossibleMovesKing(int board[8][8], const int x, const int y)
+{
+    for (int i = -1; i < 2; i++)
+    {
+        for (int j = -1; j < 2; j++)
+        {
+            int xt = x + i;
+            int yt = y + j;
+            if (isWithinBoard(xt, yt) && (xt != x || yt != y))
+            {
+                
+                board[yt][xt] = Attackable;
+            }
+        }
+    }
+}
+
 void getPossibleMoves(int board[8][8], const int x, const int y) 
 {
     return;
@@ -183,7 +249,7 @@ int main() {
 
     printBoard(board);
 
-    getPossibleMovesBishop(board, 2, 0);
+    getPossibleMovesKnight(board, 1, 0);
     printBoard(board);
 
     return 0;
