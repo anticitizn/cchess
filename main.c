@@ -10,10 +10,10 @@ void initializeBoard(int board[8][8])
 {
     int order[8] = {Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook};
     for (int i = 0; i < 8; i++) {
-        board[0][i] = order[i];
-        board[1][i] = Pawn;
-        board[6][i] = -Pawn;
-        board[7][i] = -order[i];
+        board[i][0] = order[i];
+        board[i][1] = Pawn;
+        board[i][6] = -Pawn;
+        board[i][7] = -order[i];
     }
 
     return;
@@ -70,14 +70,14 @@ void getPossibleMovesPawn(int board[8][8], const int x, const int y)
     {
         if (isWithinBoard(x, y+1))
         {
-            board[y+1][x] = Passable;
+            board[x][y+1] = Passable;
         }
     }
     else
     {
         if (isWithinBoard(x, y-1))
         {
-            board[y-1][x] = Passable;
+            board[x][y-1] = Passable;
         }
     }
 }
@@ -90,7 +90,7 @@ void getPossibleMovesBishop(int board[8][8], const int x, const int y)
         int yt = y + j;
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt] = Attackable;
+            board[xt][yt] = Attackable;
         }
     }
 
@@ -100,7 +100,7 @@ void getPossibleMovesBishop(int board[8][8], const int x, const int y)
         int yt = y - j;
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt] = Attackable;
+            board[xt][yt] = Attackable;
         }
     }
 
@@ -110,7 +110,7 @@ void getPossibleMovesBishop(int board[8][8], const int x, const int y)
         int yt = y + j;
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt] = Attackable;
+            board[xt][yt] = Attackable;
         }
     }
 
@@ -120,7 +120,7 @@ void getPossibleMovesBishop(int board[8][8], const int x, const int y)
         int yt = y - j;
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt] = Attackable;
+            board[xt][yt] = Attackable;
         }
     }
 }
@@ -145,7 +145,7 @@ void getPossibleMovesKnight(int board[8][8], const int x, const int y)
         int yt = y_positions[(i+1) % 4];
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt] = Attackable;
+            board[xt][yt] = Attackable;
         }
     }
 
@@ -155,7 +155,7 @@ void getPossibleMovesKnight(int board[8][8], const int x, const int y)
         int yt = y_positions[(i-1) % 4];
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt] = Attackable;
+            board[xt][yt] = Attackable;
         }
     }
     
@@ -170,7 +170,7 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
         int yt = y;
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt];
+            board[xt][yt];
         }
     }
 
@@ -180,7 +180,7 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
         int yt = y;
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt];
+            board[xt][yt];
         }
     }
 
@@ -190,7 +190,7 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
         int yt = y + i;
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt];
+            board[xt][yt];
         }
     }
 
@@ -200,7 +200,7 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
         int yt = y - i;
         if (isWithinBoard(xt, yt))
         {
-            board[yt][xt];
+            board[xt][yt];
         }
     }
 }
@@ -222,7 +222,7 @@ void getPossibleMovesKing(int board[8][8], const int x, const int y)
             if (isWithinBoard(xt, yt) && (xt != x || yt != y))
             {
                 
-                board[yt][xt] = Attackable;
+                board[xt][yt] = Attackable;
             }
         }
     }
@@ -237,7 +237,7 @@ void printBoard(int board[8][8])
 {
     for (int i = 7; i >= 0; i--) {
         for (int j = 0; j < 8; j++) {
-            printf("%c%c ", getFigureColorChar(board[i][j]), getFigureChar(board[i][j]));
+            printf("%c%c ", getFigureColorChar(board[j][i]), getFigureChar(board[j][i]));
         }
         putchar('\n');
     }
