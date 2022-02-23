@@ -30,6 +30,17 @@ void clearBoard(int board[8][8])
     }
 }
 
+void copyBoard(int board[8][8], int newboard[8][8])
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            newboard[i][j] = board[i][j];
+        }
+    }
+}
+
 int isWithinBoard(const int x, const int y)
 {
     if (x >= 0 && x < 8 && y >= 0 && y < 8)
@@ -62,6 +73,18 @@ int getFigureColor(const int figure)
 char getFigureColorChar(const int figure)
 {
     return figure >= 0 ? ' ' : '-';
+}
+
+int checkFiguresSameColor(int figure1, int figure2)
+{
+    if (figure1 * figure2 > 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 void getPossibleMovesPawn(int board[8][8], const int x, const int y)
@@ -228,8 +251,57 @@ void getPossibleMovesKing(int board[8][8], const int x, const int y)
     }
 }
 
+void removeOccupiedMoves(int board[8][8], int moveboard[8][8], const int x, const int y)
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            // If tile is passable or attackable and is occupied by same color figure
+            // remove it from the moveable tiles array
+            if ((moveboard[i][j] == Passable || moveboard[i][j] == Attackable) && checkFiguresSameColor(board[x][y], board[i][j]))
+            {
+                moveboard[i][j] = board[i][j];
+            }
+        }
+    }
+}
+
 void getPossibleMoves(int board[8][8], const int x, const int y) 
 {
+    int tempboard[8][8] = {};
+    copyBoard(board, tempboard);
+
+    if (!isWithinBoard(x,y))
+    {
+        return;
+    }
+
+    switch(board[x][y])
+    {
+        case Pawn:
+            getPossibleMovesPawn(tempboard, x, y);
+            break;
+        case Bishop:
+            getPossibleMovesBishop(tempboard, x, y);
+            break;
+        case Knight:
+            getPossibleMovesKnight(tempboard, x, y);
+            break;
+        case Rook:
+            getPossibleMovesRook(tempboard, x, y);
+            break;
+        case Queen:
+            getPossibleMovesQueen(tempboard, x, y);
+            break;
+        case King:
+            getPossibleMovesKing(tempboard, x, y);
+            break;
+    }
+
+    removeOccupiedMoves(board, tempboard, x, y);
+    printBoard(tempboard);
+
     return;
 }
 
@@ -249,8 +321,7 @@ int main() {
 
     printBoard(board);
 
-    getPossibleMovesKnight(board, 1, 0);
-    printBoard(board);
+    getPossibleMoves(board, 1, 0);
 
     return 0;
 }
