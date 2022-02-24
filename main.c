@@ -4,11 +4,12 @@
 
 int main() {
     int board[8][8] = {};
+    int tempboard[8][8] = {};
     initializeBoard(board);
-
-    printBoard(board);
-
-    getPossibleMoves(board, 3, 0);
+    copyBoard(board, tempboard);
+    
+    getPossibleMoves(tempboard, 3, 0);
+    printBoard(tempboard);
 
     return 0;
 }

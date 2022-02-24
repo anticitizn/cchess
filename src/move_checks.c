@@ -214,7 +214,7 @@ void getPossibleMoves(int board[8][8], const int x, const int y)
     }
 
     removeOccupiedMoves(board, tempboard, x, y);
-    printBoard(tempboard);
+    copyBoard(tempboard, board);
 
     return;
 }

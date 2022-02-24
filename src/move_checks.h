@@ -7,5 +7,6 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y);
 void getPossibleMovesQueen(int board[8][8], const int x, const int y);
 void getPossibleMovesKing(int board[8][8], const int x, const int y);
 void getPossibleMovesPawn(int board[8][8], const int x, const int y);
+void getPossibleMoves(int board[8][8], const int x, const int y);
 
 #endif
