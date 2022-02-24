@@ -3,20 +3,12 @@
 
 void getPossibleMovesPawn(int board[8][8], const int x, const int y)
 {
-    if (board[y][x] > 0)
+    int temp = board[x][y] > 0 ? 1 : -1;
+    if (isWithinBoard(x, y + temp))
     {
-        if (isWithinBoard(x, y+1))
-        {
-            board[x][y+1] = Passable;
-        }
+        board[x][y+temp] = Passable;
     }
-    else
-    {
-        if (isWithinBoard(x, y-1))
-        {
-            board[x][y-1] = Passable;
-        }
-    }
+    
 }
 
 void getPossibleMovesBishop(int board[8][8], const int x, const int y)

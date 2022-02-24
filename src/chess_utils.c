@@ -87,10 +87,26 @@ int checkFiguresSameColor(int figure1, int figure2)
 void printBoard(int board[8][8])
 {
     putchar('\n');
-    for (int i = 7; i >= 0; i--) {
-        for (int j = 0; j < 8; j++) {
+    for (int i = 7; i >= 0; i--) 
+    {
+        printf("%d | ", i+1);
+        for (int j = 0; j < 8; j++) 
+        {
             printf("%c%c ", getFigureColorChar(board[j][i]), getFigureChar(board[j][i]));
         }
         putchar('\n');
     }
+    
+    printf("  ");
+    for (int i = 0; i < 25; i++)
+    {
+        putchar('-');
+    }
+    printf("\n    ");
+
+    for (int i = 65; i < 73; i++) 
+    {
+        printf(" %c ", (char)i);
+    }
+    putchar('\n');
 }

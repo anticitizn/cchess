@@ -11,6 +11,7 @@ int main() {
     copyBoard(board, tempboard);
 
     getPossibleMoves(tempboard, 4, 4);
+    printBoard(board);
     printBoard(tempboard);
 
     return 0;
