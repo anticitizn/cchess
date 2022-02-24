@@ -3,7 +3,7 @@ project(cchess)
 
 file(GLOB SOURCES src/*.c)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}")
 
 add_executable(${PROJECT_NAME} ${SOURCES} main.c)
 
