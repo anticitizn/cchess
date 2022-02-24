@@ -6,9 +6,11 @@ int main() {
     int board[8][8] = {};
     int tempboard[8][8] = {};
     initializeBoard(board);
-    copyBoard(board, tempboard);
     
-    getPossibleMoves(tempboard, 3, 0);
+    board[4][4] = Queen;
+    copyBoard(board, tempboard);
+
+    getPossibleMoves(tempboard, 4, 4);
     printBoard(tempboard);
 
     return 0;

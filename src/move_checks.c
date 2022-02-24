@@ -21,44 +21,52 @@ void getPossibleMovesPawn(int board[8][8], const int x, const int y)
 
 void getPossibleMovesBishop(int board[8][8], const int x, const int y)
 {
-    for (int j = 0; j < 8; j++)
+    for (int j = 1; j < 8; j++)
     {
         int xt = x + j;
         int yt = y + j;
-        if (isWithinBoard(xt, yt))
-        {
-            board[xt][yt] = Attackable;
-        }
+
+        if (!isWithinBoard(xt,yt)) break;
+
+        int exit = board[xt][yt] != None ? 1 : 0;
+        board[xt][yt] = Attackable;
+        if (exit) break;
     }
 
-    for (int j = 0; j < 8; j++)
+    for (int j = 1; j < 8; j++)
     {
         int xt = x + j;
         int yt = y - j;
-        if (isWithinBoard(xt, yt))
-        {
-            board[xt][yt] = Attackable;
-        }
+
+        if (!isWithinBoard(xt,yt)) break;
+
+        int exit = board[xt][yt] != None ? 1 : 0;
+        board[xt][yt] = Attackable;
+        if (exit) break;
     }
 
-    for (int j = 0; j < 8; j++)
+    for (int j = 1; j < 8; j++)
     {
         int xt = x - j;
         int yt = y + j;
-        if (isWithinBoard(xt, yt))
-        {
-            board[xt][yt] = Attackable;
-        }
+
+        if (!isWithinBoard(xt,yt)) break;
+
+        int exit = board[xt][yt] != None ? 1 : 0;
+        board[xt][yt] = Attackable;
+        if (exit) break;
     }
 
-    for (int j = 0; j < 8; j++)
+    for (int j = 1; j < 8; j++)
     {
         int xt = x - j;
         int yt = y - j;
-        if (isWithinBoard(xt, yt))
-        {
-            board[xt][yt] = Attackable;
-        }
+
+        if (!isWithinBoard(xt,yt)) break;
+
+        int exit = board[xt][yt] != None ? 1 : 0;
+        board[xt][yt] = Attackable;
+        if (exit) break;
     }
 }
 
@@ -101,44 +109,52 @@ void getPossibleMovesKnight(int board[8][8], const int x, const int y)
 
 void getPossibleMovesRook(int board[8][8], const int x, const int y)
 {
-    for (int i = 0; i < 8; i++)
+    for (int i = 1; i < 8; i++)
     {
         int xt = x + i;
         int yt = y;
-        if (isWithinBoard(xt, yt))
-        {
-            board[xt][yt] = Attackable;
-        }
+        
+        if (!isWithinBoard(xt,yt)) break;
+
+        int exit = board[xt][yt] != None ? 1 : 0;
+        board[xt][yt] = Attackable;
+        if (exit) break;
     }
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 1; i < 8; i++)
     {
         int xt = x - i;
         int yt = y;
-        if (isWithinBoard(xt, yt))
-        {
-            board[xt][yt] = Attackable;
-        }
+
+        if (!isWithinBoard(xt,yt)) break;
+
+        int exit = board[xt][yt] != None ? 1 : 0;
+        board[xt][yt] = Attackable;
+        if (exit) break;
     }
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 1; i < 8; i++)
     {
         int xt = x;
         int yt = y + i;
-        if (isWithinBoard(xt, yt))
-        {
-            board[xt][yt] = Attackable;
-        }
+        
+        if (!isWithinBoard(xt,yt)) break;
+
+        int exit = board[xt][yt] != None ? 1 : 0;
+        board[xt][yt] = Attackable;
+        if (exit) break;
     }
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 1; i < 8; i++)
     {
         int xt = x;
         int yt = y - i;
-        if (isWithinBoard(xt, yt))
-        {
-            board[xt][yt] = Attackable;
-        }
+        
+        if (!isWithinBoard(xt,yt)) break;
+
+        int exit = board[xt][yt] != None ? 1 : 0;
+        board[xt][yt] = Attackable;
+        if (exit) break;
     }
 }
 
