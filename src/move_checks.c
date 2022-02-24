@@ -107,7 +107,7 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
         int yt = y;
         if (isWithinBoard(xt, yt))
         {
-            board[xt][yt];
+            board[xt][yt] = Attackable;
         }
     }
 
@@ -117,7 +117,7 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
         int yt = y;
         if (isWithinBoard(xt, yt))
         {
-            board[xt][yt];
+            board[xt][yt] = Attackable;
         }
     }
 
@@ -127,7 +127,7 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
         int yt = y + i;
         if (isWithinBoard(xt, yt))
         {
-            board[xt][yt];
+            board[xt][yt] = Attackable;
         }
     }
 
@@ -137,7 +137,7 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
         int yt = y - i;
         if (isWithinBoard(xt, yt))
         {
-            board[xt][yt];
+            board[xt][yt] = Attackable;
         }
     }
 }

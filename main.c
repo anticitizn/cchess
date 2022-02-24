@@ -8,7 +8,7 @@ int main() {
 
     printBoard(board);
 
-    getPossibleMoves(board, 1, 0);
+    getPossibleMoves(board, 3, 0);
 
     return 0;
 }
