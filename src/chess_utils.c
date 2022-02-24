@@ -58,7 +58,7 @@ char getFigureChar(const int figure)
     }
     else
     {
-        return '%';
+        return ',';
     }
 }
 
@@ -69,7 +69,7 @@ int getFigureColor(const int figure)
 
 char getFigureColorChar(const int figure)
 {
-    return figure >= 0 ? ' ' : '-';
+    return figure >= 0 ? ' ' : ':';
 }
 
 int checkFiguresSameColor(int figure1, int figure2)
