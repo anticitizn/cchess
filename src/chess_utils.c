@@ -51,10 +51,14 @@ int isWithinBoard(const int x, const int y)
 
 char getFigureChar(const int figure)
 {
-    const char figure_chars[8] = {' ', 'p', 'k', 'b', 'r', 'Q', '@'};
-    if (figure < 7) 
+    const char figure_chars[8] = {' ', 'p', 'n', 'b', 'r', 'q', 'k'};
+    if (figure < 7 && figure >= 0) 
     {
         return figure_chars[abs(figure)];
+    }
+    else if (figure < 0)
+    {
+        return figure_chars[abs(figure)] - 32;
     }
     else
     {
@@ -64,12 +68,7 @@ char getFigureChar(const int figure)
 
 int getFigureColor(const int figure)
 {
-    return figure >= 0 ? 1 : -1;
-}
-
-char getFigureColorChar(const int figure)
-{
-    return figure >= 0 ? ' ' : ':';
+    return figure >= 0 ? 1 : 0;
 }
 
 int checkFiguresSameColor(int figure1, int figure2)
@@ -92,13 +91,13 @@ void printBoard(int board[8][8])
         printf("%d | ", i+1);
         for (int j = 0; j < 8; j++) 
         {
-            printf("%c%c ", getFigureColorChar(board[j][i]), getFigureChar(board[j][i]));
+            printf("%c ", getFigureChar(board[j][i]));
         }
         putchar('\n');
     }
     
     printf("  ");
-    for (int i = 0; i < 25; i++)
+    for (int i = 0; i < 17; i++)
     {
         putchar('-');
     }
@@ -106,7 +105,7 @@ void printBoard(int board[8][8])
 
     for (int i = 65; i < 73; i++) 
     {
-        printf(" %c ", (char)i);
+        printf("%c ", (char)i);
     }
     putchar('\n');
 }

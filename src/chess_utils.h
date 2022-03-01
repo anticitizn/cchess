@@ -10,7 +10,6 @@ void copyBoard(int board[8][8], int newboard[8][8]);
 int isWithinBoard(const int x, const int y);
 char getFigureChar(const int figure);
 int getFigureColor(const int figure);
-char getFigureColorChar(const int figure);
 int checkFiguresSameColor(int figure1, int figure2);
 void printBoard(int board[8][8]);
 
