@@ -1,7 +1,7 @@
 #include <src/move_checks.h>
 #include <src/chess_utils.h>
 
-void getPossibleMovesPawn(int board[8][8], const int x, const int y)
+void getPseudoMovesPawn(int board[8][8], const int x, const int y)
 {
     int temp = board[x][y] > 0 ? 1 : -1;
     if (isWithinBoard(x, y + temp))
@@ -11,7 +11,7 @@ void getPossibleMovesPawn(int board[8][8], const int x, const int y)
     
 }
 
-void getPossibleMovesBishop(int board[8][8], const int x, const int y)
+void getPseudoMovesBishop(int board[8][8], const int x, const int y)
 {
     for (int j = 1; j < 8; j++)
     {
@@ -62,7 +62,7 @@ void getPossibleMovesBishop(int board[8][8], const int x, const int y)
     }
 }
 
-void getPossibleMovesKnight(int board[8][8], const int x, const int y)
+void getPseudoMovesKnight(int board[8][8], const int x, const int y)
 {
     int x_positions[4] = {};
     x_positions[0] = x-2;
@@ -99,7 +99,7 @@ void getPossibleMovesKnight(int board[8][8], const int x, const int y)
     return;
 }
 
-void getPossibleMovesRook(int board[8][8], const int x, const int y)
+void getPseudoMovesRook(int board[8][8], const int x, const int y)
 {
     for (int i = 1; i < 8; i++)
     {
@@ -150,13 +150,13 @@ void getPossibleMovesRook(int board[8][8], const int x, const int y)
     }
 }
 
-void getPossibleMovesQueen(int board[8][8], const int x, const int y)
+void getPseudoMovesQueen(int board[8][8], const int x, const int y)
 {
-    getPossibleMovesRook(board, x, y);
-    getPossibleMovesBishop(board, x, y);
+    getPseudoMovesRook(board, x, y);
+    getPseudoMovesBishop(board, x, y);
 }
 
-void getPossibleMovesKing(int board[8][8], const int x, const int y)
+void getPseudoMovesKing(int board[8][8], const int x, const int y)
 {
     for (int i = -1; i < 2; i++)
     {
@@ -189,7 +189,7 @@ void removeOccupiedMoves(int board[8][8], int moveboard[8][8], const int x, cons
     }
 }
 
-void getPossibleMoves(int board[8][8], const int x, const int y) 
+void getPseudoMoves(int board[8][8], const int x, const int y) 
 {
     int tempboard[8][8] = {};
     copyBoard(board, tempboard);
@@ -202,22 +202,22 @@ void getPossibleMoves(int board[8][8], const int x, const int y)
     switch(board[x][y])
     {
         case Pawn:
-            getPossibleMovesPawn(tempboard, x, y);
+            getPseudoMovesPawn(tempboard, x, y);
             break;
         case Bishop:
-            getPossibleMovesBishop(tempboard, x, y);
+            getPseudoMovesBishop(tempboard, x, y);
             break;
         case Knight:
-            getPossibleMovesKnight(tempboard, x, y);
+            getPseudoMovesKnight(tempboard, x, y);
             break;
         case Rook:
-            getPossibleMovesRook(tempboard, x, y);
+            getPseudoMovesRook(tempboard, x, y);
             break;
         case Queen:
-            getPossibleMovesQueen(tempboard, x, y);
+            getPseudoMovesQueen(tempboard, x, y);
             break;
         case King:
-            getPossibleMovesKing(tempboard, x, y);
+            getPseudoMovesKing(tempboard, x, y);
             break;
     }
 

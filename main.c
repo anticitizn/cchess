@@ -10,7 +10,7 @@ int main() {
     board[4][4] = Queen;
     copyBoard(board, tempboard);
 
-    getPossibleMoves(tempboard, 4, 4);
+    getPseudoMoves(tempboard, 4, 4);
     printBoard(board);
     printBoard(tempboard);
 

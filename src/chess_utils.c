@@ -62,7 +62,7 @@ char getFigureChar(const int figure)
     }
     else
     {
-        return ',';
+        return '.';
     }
 }
 
@@ -96,14 +96,14 @@ void printBoard(int board[8][8])
         putchar('\n');
     }
     
-    printf("  ");
-    for (int i = 0; i < 17; i++)
+    printf("  +");
+    for (int i = 0; i < 16; i++)
     {
         putchar('-');
     }
     printf("\n    ");
 
-    for (int i = 65; i < 73; i++) 
+    for (int i = 65; i < 73; i++)
     {
         printf("%c ", (char)i);
     }
