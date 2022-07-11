@@ -222,7 +222,64 @@ void getPseudoMoves(int board[8][8], const int x, const int y)
     }
 
     removeOccupiedMoves(board, tempboard, x, y);
+
+    // remove all moves that result in check
+    // TO-DO: implement function that can *check* if specified color is in check on a given board
+    // TO-DO: split move checks into multiple files; pseudomoves and others maybe?
+
     copyBoard(tempboard, board);
 
     return;
+}
+
+unsigned int isKingInCheck(int color, int board[8][8])
+{
+    if (color > 0)
+    {
+        color = 1;
+    }
+    else
+    {
+        color = -1;
+    }
+
+    int tempboard[8][8] = {};
+    copyBoard(board, tempboard);
+
+    int kingX = -1;
+    int kingY = -1;
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (board[i][j] == King * color)
+            {
+                kingX = i;
+                kingY = j;
+                break;
+            }
+        }
+    }
+
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (!checkFiguresSameColor(color, board[i][j]))
+            {
+                getPseudoMoves(tempboard, i, j);
+            }
+        }
+    }
+
+    if (tempboard[kingX][kingY] == Attackable)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+
+
 }
