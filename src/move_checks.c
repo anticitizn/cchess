@@ -4,11 +4,29 @@
 void getPseudoMovesPawn(int board[8][8], const int x, const int y)
 {
     int temp = board[x][y] > 0 ? 1 : -1;
+
+    // Two-Square advance  
+    if ((y == 1 || y == 6) && board[x][y+temp] == None)
+    {
+        board[x][y+temp*2] = Passable;
+    }
+
+    // Normal moving
     if (isWithinBoard(x, y + temp))
     {
         board[x][y+temp] = Passable;
     }
     
+    // Capturing
+    if (isWithinBoard(x+1, y+temp) && board[x+1][y+temp] != None && !checkFiguresSameColor(board[x][y], board[x+1][y+temp]))
+    {
+        board[x+1][y+temp] = Attackable;
+    }
+
+    if (isWithinBoard(x-1, y+temp) && board[x-1][y+temp] != None && !checkFiguresSameColor(board[x][y], board[x-1][y+temp]))
+    {
+        board[x-1][y+temp] = Attackable;
+    }
 }
 
 void getPseudoMovesBishop(int board[8][8], const int x, const int y)
