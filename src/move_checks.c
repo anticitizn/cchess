@@ -5,28 +5,32 @@ void getPseudoMovesPawn(int board[8][8], const int x, const int y)
 {
     int temp = board[x][y] > 0 ? 1 : -1;
 
-    // Two-Square advance  
+    // Two square advance - only possible if pawn has not moved yet
     if ((y == 1 || y == 6) && board[x][y+temp] == None)
     {
         board[x][y+temp*2] = Passable;
     }
 
-    // Normal moving
-    if (isWithinBoard(x, y + temp))
+    // One square advance
+    if (isWithinBoard(x, y + temp) && board[x][y+temp] == None)
     {
         board[x][y+temp] = Passable;
     }
     
     // Capturing
+    // To the right
     if (isWithinBoard(x+1, y+temp) && board[x+1][y+temp] != None && !checkFiguresSameColor(board[x][y], board[x+1][y+temp]))
     {
         board[x+1][y+temp] = Attackable;
     }
 
+    // To the left
     if (isWithinBoard(x-1, y+temp) && board[x-1][y+temp] != None && !checkFiguresSameColor(board[x][y], board[x-1][y+temp]))
     {
         board[x-1][y+temp] = Attackable;
     }
+
+    // TO-DO: En passant
 }
 
 void getPseudoMovesBishop(int board[8][8], const int x, const int y)
