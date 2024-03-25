@@ -213,8 +213,8 @@ void removeOccupiedMoves(int board[8][8], int moveboard[8][8], const int x, cons
 
 void getPseudoMoves(int board[8][8], const int x, const int y) 
 {
-    int tempboard[8][8] = {};
-    copyBoard(board, tempboard);
+    int pseudomove_board[8][8] = {};
+    copyBoard(board, pseudomove_board);
 
     if (!isWithinBoard(x,y))
     {
@@ -224,32 +224,50 @@ void getPseudoMoves(int board[8][8], const int x, const int y)
     switch(board[x][y])
     {
         case Pawn:
-            getPseudoMovesPawn(tempboard, x, y);
+            getPseudoMovesPawn(pseudomove_board, x, y);
             break;
         case Bishop:
-            getPseudoMovesBishop(tempboard, x, y);
+            getPseudoMovesBishop(pseudomove_board, x, y);
             break;
         case Knight:
-            getPseudoMovesKnight(tempboard, x, y);
+            getPseudoMovesKnight(pseudomove_board, x, y);
             break;
         case Rook:
-            getPseudoMovesRook(tempboard, x, y);
+            getPseudoMovesRook(pseudomove_board, x, y);
             break;
         case Queen:
-            getPseudoMovesQueen(tempboard, x, y);
+            getPseudoMovesQueen(pseudomove_board, x, y);
             break;
         case King:
-            getPseudoMovesKing(tempboard, x, y);
+            getPseudoMovesKing(pseudomove_board, x, y);
             break;
     }
 
-    removeOccupiedMoves(board, tempboard, x, y);
+    removeOccupiedMoves(board, pseudomove_board, x, y);
 
-    // remove all moves that result in check
-    // TO-DO: implement function that can *check* if specified color is in check on a given board
-    // TO-DO: split move checks into multiple files; pseudomoves and others maybe?
+    // Remove all pseudomoves that result in a check
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (pseudomove_board[i][j] == (Passable | Attackable))
+            {
+                int tempboard[8][8] = {};
+                copyBoard(pseudomove_board, tempboard);
 
-    copyBoard(tempboard, board);
+                tempboard[i][j] = tempboard[x][y];
+                tempboard[x][y] = None;
+
+                if (isKingInCheck(getFigureColor(tempboard[i][j]), tempboard))
+                {
+                    // Remove the pseudomove from the square and replace it with its original content
+                    pseudomove_board[i][j] = board[i][j];
+                }
+            }
+        }
+    }
+
+    copyBoard(pseudomove_board, board);
 
     return;
 }
