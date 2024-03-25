@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "chess_utils.h": "c",
+        "move_checks.h": "c"
+    }
+}

@@ -8,6 +8,7 @@ void getPseudoMovesQueen(int board[8][8], const int x, const int y);
 void getPseudoMovesKing(int board[8][8], const int x, const int y);
 void getPseudoMovesPawn(int board[8][8], const int x, const int y);
 void getPseudoMoves(int board[8][8], const int x, const int y);
+void getAllMoves(int board[8][8], int x, int y);
 unsigned int isKingInCheck(int color, int board[8][8]);
 
 #endif

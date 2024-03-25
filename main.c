@@ -7,10 +7,10 @@ int main() {
     int tempboard[8][8] = {};
     initializeBoard(board);
     
-    board[6][4] = Queen;
+    board[7][4] = Queen;
     board[2][4] = Pawn;
     copyBoard(board, tempboard);
-
+    
     getPseudoMoves(tempboard, 5, 6);
     printBoard(board);
     printBoard(tempboard);

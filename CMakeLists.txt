@@ -4,6 +4,7 @@ project(cchess)
 file(GLOB SOURCES src/*.c)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 
 add_executable(${PROJECT_NAME} ${SOURCES} main.c)
 

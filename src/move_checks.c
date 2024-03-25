@@ -1,6 +1,8 @@
 #include <src/move_checks.h>
 #include <src/chess_utils.h>
 
+#include <stdlib.h>
+
 void getPseudoMovesPawn(int board[8][8], const int x, const int y)
 {
     int temp = board[x][y] > 0 ? 1 : -1;
@@ -211,7 +213,9 @@ void removeOccupiedMoves(int board[8][8], int moveboard[8][8], const int x, cons
     }
 }
 
-void getPseudoMoves(int board[8][8], const int x, const int y) 
+// Returns a board with all possible pseudo moves populated,
+// including ones that would result in the king being in check
+void getAllPseudoMoves(int board[8][8], const int x, const int y) 
 {
     int pseudomove_board[8][8] = {};
     copyBoard(board, pseudomove_board);
@@ -221,7 +225,7 @@ void getPseudoMoves(int board[8][8], const int x, const int y)
         return;
     }
 
-    switch(board[x][y])
+    switch(abs(board[x][y]))
     {
         case Pawn:
             getPseudoMovesPawn(pseudomove_board, x, y);
@@ -244,28 +248,6 @@ void getPseudoMoves(int board[8][8], const int x, const int y)
     }
 
     removeOccupiedMoves(board, pseudomove_board, x, y);
-
-    // Remove all pseudomoves that result in a check
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            if (pseudomove_board[i][j] == (Passable | Attackable))
-            {
-                int tempboard[8][8] = {};
-                copyBoard(pseudomove_board, tempboard);
-
-                tempboard[i][j] = tempboard[x][y];
-                tempboard[x][y] = None;
-
-                if (isKingInCheck(getFigureColor(tempboard[i][j]), tempboard))
-                {
-                    // Remove the pseudomove from the square and replace it with its original content
-                    pseudomove_board[i][j] = board[i][j];
-                }
-            }
-        }
-    }
 
     copyBoard(pseudomove_board, board);
 
@@ -307,7 +289,7 @@ unsigned int isKingInCheck(int color, int board[8][8])
         {
             if (!checkFiguresSameColor(color, board[i][j]))
             {
-                getPseudoMoves(tempboard, i, j);
+                getAllPseudoMoves(tempboard, i, j);
             }
         }
     }
@@ -322,4 +304,36 @@ unsigned int isKingInCheck(int color, int board[8][8])
     }
 
 
+}
+
+// Returns a board with all legal pseudo moves populated
+void getPseudoMoves(int board[8][8], int x, int y)
+{
+    int pseudomove_board[8][8] = {};
+    copyBoard(board, pseudomove_board);
+    getAllPseudoMoves(pseudomove_board, x, y);
+    
+    // Remove all pseudomoves that result in a check
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (pseudomove_board[i][j] == Passable || pseudomove_board[i][j] == Attackable)
+            {
+                int tempboard[8][8] = {};
+                copyBoard(pseudomove_board, tempboard);
+
+                tempboard[i][j] = tempboard[x][y];
+                tempboard[x][y] = None;
+
+                if (isKingInCheck(getFigureColor(tempboard[i][j]), tempboard))
+                {
+                    // Remove the pseudomove from the square and replace it with its original content
+                    pseudomove_board[i][j] = board[i][j];
+                }
+            }
+        }
+    }
+
+    copyBoard(pseudomove_board, board);
 }
